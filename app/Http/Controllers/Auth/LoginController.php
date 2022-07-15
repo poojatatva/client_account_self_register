@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Session;
 use Socialite;
@@ -43,7 +44,7 @@ class LoginController extends Controller
     {
         try {
     
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
      
             $finduser = User::where('google_id', $user->id)->first();
      
