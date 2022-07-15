@@ -43,22 +43,31 @@
                             href="/auth/google" id="Google"></a>
                     </div>
                     <div class="signin-imgur-register core-dark core-shadow br5">
-
-
                         <div class="error-phone-verification error nodisplay">
                             <p class="error-msg"></p>
                             <div class="learn-more">Can't register? <a
                                     href="https://help.imgur.com/hc/en-us/articles/360028910652">Learn more.</a></div>
                         </div>
                         <input type="text" tabindex="5" name="name" maxlength="255" id="name"
-                            class="br5 lvl1-dark" placeholder="name" required>
+                            class="br5 lvl1-dark" placeholder="name">
+                        @if (count($err_response) > 0 && array_key_exists('name', $err_response))
+                            <span style="color:red;">{{ $err_response['name'] }}</span>
+                        @endif
                         <input type="text" tabindex="6" name="email" maxlength="255" id="email"
-                            class="br5 lvl1-dark" placeholder="Email" required>
+                            class="br5 lvl1-dark" placeholder="Email">
+                        @if (count($err_response) > 0 && array_key_exists('email', $err_response))
+                            <span style="color:red;">{{ $err_response['email'] }}</span>
+                        @endif
                         <input type="password" tabindex="7" name="password" maxlength="255" id="password"
-                            class="br5 lvl1-dark" placeholder="Password" required>
+                            class="br5 lvl1-dark" placeholder="Password">
+                        @if (count($err_response) > 0 && array_key_exists('password', $err_response))
+                            <span style="color:red;">{{ $err_response['password'] }}</span>
+                        @endif
                         <input type="password" tabindex="8" name="password_confirm" maxlength="255"
-                            id="password_confirm" class="br5 lvl1-dark" placeholder="Retype Password" required>
-
+                            id="password_confirm" class="br5 lvl1-dark" placeholder="Retype Password">
+                        @if (count($err_response) > 0 && array_key_exists('password_confirm', $err_response))
+                            <span style="color:red;">{{ $err_response['password_confirm'] }}</span>
+                        @endif
 
                     </div>
                     <button class="btn btn-action right" name="submit" tabindex="8" type="submit">Register</button>

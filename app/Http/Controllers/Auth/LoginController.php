@@ -9,11 +9,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Session;
 use Socialite;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
     public function login(Request $request)
-    {        
+    {       
         $result = app('App\Http\Controllers\AuthController')->login($request); 
         if($result->original['message'] == "Success")
         {
@@ -74,10 +75,24 @@ class LoginController extends Controller
 
     public function register()
     {
-        return view('register');
+        $err_response = [];
+        return view('register',compact('err_response'));
     }
     public function registered(Request $request)
     {
+        $validator = Validator::make($request->all(), ['name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required',
+        'password_confirm' => 'required|same:password']);
+        $err_response = []; 
+            
+        if ($validator->fails()) {
+            foreach ($validator->messages()->toArray() as $key => $value) { 
+                $obj = new \stdClass(); 
+                $err_response[$key] = $value[0];
+            }
+            return view('register',compact('err_response'));
+        }
         $result = app('App\Http\Controllers\AuthController')->register($request); 
         if($result->original['message'] == "Success")
         {
