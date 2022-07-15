@@ -25,7 +25,7 @@ class LoginController extends Controller
         else
         {
             Session::put('login-error','The provided credentials do not match our records.');
-            return redirect()->back()->withErrors('The provided credentials do not match our records.');
+            return redirect('/login');
         }
     } 
     
