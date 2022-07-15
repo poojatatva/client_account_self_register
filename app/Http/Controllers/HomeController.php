@@ -19,13 +19,13 @@ class HomeController extends Controller
         $lon = $locationInfo->longitude;
         $weatherMainInfo = array();
         $userInfo = array();
-        /*$weatherData = Redis::get('weather');
+        $weatherData = Redis::get('weather');
         if(isset($weatherData)) {
             $weatherFullInfo = json_decode($weatherData,true);
             $weatherMainInfo = $weatherFullInfo['main'];
         }
         else
-        {*/
+        {
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
@@ -48,11 +48,11 @@ class HomeController extends Controller
             if ($err) {
                 echo "cURL Error #:" . $err;
             } else {
-                //Redis::set('weather', $response);
+                Redis::set('weather', $response);
                 $weatherFullInfo = json_decode($response,true);
                 $weatherMainInfo = $weatherFullInfo['main'];
             }
-        //}
+        }
 
         $user = array(
             'id' => Auth::user()->id,
