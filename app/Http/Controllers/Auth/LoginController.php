@@ -14,16 +14,18 @@ use Illuminate\Support\Facades\Validator;
 class LoginController extends Controller
 {
     public function login(Request $request)
-    {       
+    {     
         $result = app('App\Http\Controllers\AuthController')->login($request); 
         if($result->original['message'] == "Success")
         {
             $user = Session::get('email');
+            Session::forget('login-error');
             return redirect('/home');
         }
         else
         {
-            return redirect('/login');
+            Session::put('login-error','The provided credentials do not match our records.');
+            return redirect()->back()->withErrors('The provided credentials do not match our records.');
         }
     } 
     

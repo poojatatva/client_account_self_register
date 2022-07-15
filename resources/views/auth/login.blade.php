@@ -32,7 +32,7 @@
                 @csrf
                 <div class="signin-imgur core-dark core-shadow br5">
 
-
+                    <span style="color:red;">{{ Session::get('login-error') }}</span>
                     <input title="Email" type="text" tabindex="5" name="email" maxlength="255" id="email"
                         class="br5 lvl1-dark valid placeholder" placeholder="Email">
 
