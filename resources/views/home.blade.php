@@ -128,10 +128,7 @@
                                                         <div style="width: 100%; height: 0px;"></div>
                                                         <div class="Gallery-Content--mediaContainer">
                                                             <div class="Gallery-Content--media">
-                                                                <?php
-                                                                echo '<pre>';
-                                                                ?>
-                                                                {{ json_encode($userInfo, JSON_PRETTY_PRINT) }}
+                                                                <?php echo '<pre>'; ?>{{ json_encode($userInfo, JSON_PRETTY_PRINT) }}
                                                             </div>
                                                         </div>
                                                     </div>
